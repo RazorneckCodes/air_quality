@@ -13,6 +13,8 @@ services:
     volumes:
       - ./volumes/influxdb/data:/var/lib/influxdb
       - ./backups/influxdb/db:/var/lib/influxdb/backup
+      - /etc/letsencrypt/live/<domain>/fullchain.pem:/etc/ssl/fullchain.pem
+      - /etc/letsencrypt/live/<domain>/privkey.pem:/etc/ssl/privkey.pem
 
   grafana:
     container_name: grafana
@@ -26,3 +28,5 @@ services:
     volumes:
       - ./volumes/grafana/data:/var/lib/grafana
       - ./volumes/grafana/log:/var/log/grafana
+      - /etc/letsencrypt/live/<domain>/fullchain.pem:/etc/fullchain.pem
+      - /etc/letsencrypt/live/<domain>/privkey.pem:/etc/privkey.pem
