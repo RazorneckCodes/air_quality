@@ -15,7 +15,7 @@ def con_influx():
     dbname = ''
     host = 'localhost'
     port = 8086
-    client = InfluxDBClient(host, port, user, password, dbname)
+    client = InfluxDBClient(host, port, user, password, dbname, ssl=True, verify_ssl=True)
     return client
 
 
