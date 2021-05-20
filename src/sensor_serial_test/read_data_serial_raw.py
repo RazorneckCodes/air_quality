@@ -4,10 +4,15 @@ import time
 from influxdb import InfluxDBClient
 
 def read_data(command): 
-    req = command + "\n"
-    ser.write(req.encode())
-    line = ser.readline().decode('utf-8').rstrip()
-    return float(line)
+    try:
+        req = command + "\n"
+        ser.write(req.encode())
+        line = ser.readline(100).decode('utf-8').rstrip()
+        return float(line)
+    except:
+        #If RPi usb crashes, this will fix it
+        s = serial.Serial('/dev/ttyS0', 9600, timeout=5)
+        s.close()
 
 def con_influx():
     user = ''
